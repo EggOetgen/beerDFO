@@ -1,0 +1,1 @@
+A piece of software for telling how much of what to put into your beer recipes to get your desired flavours by using dispersive flies optimisation. A lot of the code for formulas is taken from http://www.brewtarget.org , and requires xml recipes exported from this software

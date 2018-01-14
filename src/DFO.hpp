@@ -25,6 +25,7 @@ public:
     void findBestFly();
     void getRandF_or_RingT_Neighbours(int curr, Boolean topology);
 
+    void updateTarget(double newOF, double newFG,double newABV,double newIBU, double newCOL);
     void run();
     void display();
     

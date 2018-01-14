@@ -501,6 +501,18 @@ double DFO::returnBestCOL(){
     return bestCOL;
 }
 
+void DFO::updateTarget(double newOF, double newFG,double newABV,double newIBU, double newCOL){
+    
+    target.clear();
+    
+    target.push_back(newOF);
+    target.push_back(newFG);
+    target.push_back(newABV);
+    target.push_back(newIBU);
+    target.push_back(newCOL);
+}
+
+
 
 
 

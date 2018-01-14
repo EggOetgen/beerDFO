@@ -3,10 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
- xml.loadFile("actualBeer.xml");
+ //xml.loadFile("actualBeer.xml");
   //  xml.loadFile("what_i_have.xml");
   //   xml.loadFile("apa.xml");
-     // xml.loadFile("apaIng.xml");
+      xml.loadFile("apaIng.xml");
 
     xml.pushTag("RECIPES");
     xml.pushTag("RECIPE");
@@ -113,14 +113,19 @@ void ofApp::setup(){
     yeastVecBest = yeastVec;
     
     // int dimensions = numberOfFerms+numberOfYeast+(numberOfHops * 3);
-    dfo.setup(dimensions,  1000,1.107, 1.027, 4.8, 43.289, 7.46393, hopVec, fermVec, yeastVec, efficiency, batchSize);
+    dfo.setup(dimensions,  1000, desiredOG, desiredFG, desiredABV, desiredIBU, desiredCOL, hopVec, fermVec, yeastVec, efficiency, batchSize);
     
     bestFly = -1;
      forms.calcOgFg(efficiency, yeastVec, fermVec, batchSize );
+      gui.setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+//    dfo.targetABV = desiredABV;
+//      dfo.targetIBU = desiredIBU;
+//    dfo.targetCOL = desiredCOL;
+    dfo.updateTarget(desiredOG, desiredFG,desiredABV, desiredIBU, desiredCOL);
   dfo.run();
 //    forms.calcOgFg(efficiency, yeastVec, fermVec, batchSize );
 //    double ibu = forms.calcIBU(hopVec, fermVec, batchSize);
@@ -162,6 +167,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    gui.begin();
+    
+    
+    {
+        ImGui::SliderFloat("ABV", &desiredABV, 1.0, 15.0);
+        ImGui::SliderFloat("Bitterness(ibu)", &desiredIBU, 0.5, 100.0);
+        ImGui::SliderFloat("Color", &desiredCOL, 2.0, 80.0);
+
+    }
+    gui.end();
     dfo.display();
 }
 

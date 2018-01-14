@@ -42,7 +42,12 @@ class ofApp : public ofBaseApp{
     int bestFly;
     float batchSize, efficiency;
     
-    float desiredOG, desiredFG, desiredIBUGU, desiredCOLOR;
+    //default for APA
+    float desiredOG = 1.107;
+    float desiredFG = 1.027;
+    float desiredABV = 4.8;
+    float desiredIBU = 43.289;
+    float desiredCOL = 7.46393;
     float ABVl, ABVh;
     float IBUGUl = 0.f;
     float IBUGUh = 1.f;
@@ -50,5 +55,7 @@ class ofApp : public ofBaseApp{
     float COLORh = 50;
     
     float eff;
+    
+     ofxImGui::Gui gui;
 		
 };

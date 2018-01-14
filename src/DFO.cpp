@@ -392,10 +392,7 @@ void DFO::display(){
         
         
         if (true) {
-            ofSetColor(200, 200, 200, 5);
-            ofSetLineWidth((float) 10.5);
-            ofLine(width / 2, 0, width / 2, height); // y
-            ofPushMatrix();
+                      ofPushMatrix();
             ofTranslate(100, 200);
             
             int gap = height / (dimensions + 1);

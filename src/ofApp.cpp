@@ -174,7 +174,11 @@ void ofApp::draw(){
         ImGui::SliderFloat("ABV", &desiredABV, 1.0, 15.0);
         ImGui::SliderFloat("Bitterness(ibu)", &desiredIBU, 0.5, 100.0);
         ImGui::SliderFloat("Color", &desiredCOL, 2.0, 80.0);
-
+        ImGui::Text("The closer this value -> %.3f <- is to zero, the more confident I am you'll like my suggestion!", dfo.flies[dfo.bestFlyIndex]->fitness);
+        ImGui::Text("My current predictions for this recipe are:");
+        ImGui::Text("ABV             : %.3f ", dfo.returnBestABV());
+        ImGui::Text("Bitterness (IBU): %.3f ", dfo.returnBestIBU());
+        ImGui::Text("Colour          : %.3f ", dfo.returnBestCOL());
     }
     gui.end();
     dfo.display();

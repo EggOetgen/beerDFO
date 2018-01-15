@@ -56,6 +56,8 @@ class ofApp : public ofBaseApp{
     
     float eff;
     
+    bool save;
+    
      ofxImGui::Gui gui;
 		
 };

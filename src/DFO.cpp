@@ -337,7 +337,9 @@ void DFO::run(){
                 double range =ranges[d];
 
              // temp[d] = flies[i]->getFeature(d) + ofRandom(1.0) *  (flies[chosen]->getFeature(d) - flies[i]->getFeature(d));// FINAL
+            //  temp[d] = flies[i]->getFeature(d) + ofRandom(1.0) *  (flies[chosen]->getFeature(d) - flies[i]->getFeature(d));// FINAL
                 
+
                temp[d] = flies[chosen]->getFeature(d) + (ofRandom(1.0) * (flies[bestFlyIndex]->getFeature(d) - flies[i]->getFeature(d)));
              
                 if (ofRandom(1.0) < dt)

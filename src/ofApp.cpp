@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+    save = false;
  //xml.loadFile("actualBeer.xml");
   //  xml.loadFile("what_i_have.xml");
   //   xml.loadFile("apa.xml");
@@ -163,6 +164,54 @@ void ofApp::update(){
      cout << dfo.flies[dfo.bestFlyIndex]->fitness << " "<< dfo.returnBestOG() << " " <<dfo.returnBestFG() << " " << dfo.returnBestABV()<< " " << " " << dfo.returnBestIBU() << " " << dfo.returnBestCOL() << endl;
    //  cout << dfo.forms.recalcColor_srm <<endl;
     //forms.calcIBU(hopVec, fermVec, batchSize);
+    if(save){
+        vector<double> temp;
+        temp =dfo.flies[dfo.bestFlyIndex]->returnFeatureVector();
+        xml.pushTag("RECIPES");
+        xml.pushTag("RECIPE");
+        xml.setValue("NAME", "myDFDO_beer");
+        xml.pushTag("HOPS");
+        
+        int numberOfHops = xml.getNumTags("HOP");
+        for(int i = 0; i < numberOfHops; i++){
+            xml.pushTag("HOP", i);
+            
+            xml.setValue("AMOUNT", temp[i]);
+            xml.popTag();
+        }
+        //  ing.push_back(hopVec);
+        xml.popTag();
+        xml.pushTag("FERMENTABLES");
+        int numberOfFerms = xml.getNumTags("FERMENTABLE");
+        for(int i = 0; i < numberOfFerms; i++){
+            xml.pushTag("FERMENTABLE", i);
+            
+            int amIt = i+numberOfHops;
+            xml.setValue("AMOUNT", temp[amIt]);
+            
+            xml.popTag();
+        }
+        //ing.push_back(fermVec);
+        xml.popTag();
+        //    xml.pushTag("MISCS");
+        xml.pushTag("YEASTS");
+        //
+        int numberOfYeast = xml.getNumTags("YEAST");
+        cout <<numberOfYeast;
+        for(int i = 0; i < numberOfYeast; i++){
+            xml.pushTag("YEAST", i);
+           
+            int amIt = i+numberOfHops + numberOfFerms;
+            xml.setValue("YEAST", temp[amIt]);
+           
+            xml.popTag();
+        }
+        xml.popTag();
+        xml.popTag();
+        xml.popTag();
+        xml.save("results/result.xml");
+        save = false;
+    }
 }
 
 //--------------------------------------------------------------
@@ -179,6 +228,7 @@ void ofApp::draw(){
         ImGui::Text("ABV             : %.3f ", dfo.returnBestABV());
         ImGui::Text("Bitterness (IBU): %.3f ", dfo.returnBestIBU());
         ImGui::Text("Colour          : %.3f ", dfo.returnBestCOL());
+        ImGui::Checkbox("Save this Recipe?", &save);
     }
     gui.end();
     dfo.display();

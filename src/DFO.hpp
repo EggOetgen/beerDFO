@@ -8,6 +8,7 @@
 
 #pragma once
 
+/*THIS CLASS IS BASED ON THE JAVASCRIPT DFO IMPLEMENTATION BY MOHAMMA MAJID AL-RIFAIE WITH ADDED FEATURES AND FITNESS FUNCTION*/
 
 #include "ofMain.h"
 #include "beerFly.hpp"
@@ -18,7 +19,7 @@ class DFO{
 public:
     DFO();
     void setup(double dimensions_, int popSize_,double targetOG_, double targetFG_, double targetABV_, double targetIBU_, double targetCOl_, vector<hops*> hopVec_, vector<fermentables*> fermVec_, vector<yeast*> yeastVec_, float efficiency, float batchSize_);
-    // void init(double dimensions, int popSize);
+
     void findNeighbors(int curr);
     double returnFeature(int f);
     double evaluate (vector<double> a);
@@ -30,8 +31,7 @@ public:
     void display();
     
     double wrapAround( double range,double input);
-    
-    double Sphere(vector<double> p);
+   
     double euclid(vector<double> a, vector<double> b);
     
     void calcBestResults();

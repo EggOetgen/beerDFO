@@ -40,7 +40,7 @@
                 <NAME>Cascade</NAME>
                 <VERSION>1</VERSION>
                 <ALPHA>6.00000000</ALPHA>
-                <AMOUNT>0.028877404</AMOUNT>
+                <AMOUNT>0.018685271</AMOUNT>
                 <USE>Boil</USE>
                 <TIME>10.00000000</TIME>
                 <NOTES>Pleasant, floral, spicy, and citrus-like.</NOTES>
@@ -59,7 +59,7 @@
                 <NAME>Cascade</NAME>
                 <VERSION>1</VERSION>
                 <ALPHA>6.00000000</ALPHA>
-                <AMOUNT>0.136666500</AMOUNT>
+                <AMOUNT>0.460451902</AMOUNT>
                 <USE>Boil</USE>
                 <TIME>0.00000000</TIME>
                 <NOTES>Pleasant, floral, spicy, and citrus-like.</NOTES>
@@ -78,7 +78,7 @@
                 <NAME>Centennial</NAME>
                 <VERSION>1</VERSION>
                 <ALPHA>10.50000000</ALPHA>
-                <AMOUNT>0.063214990</AMOUNT>
+                <AMOUNT>0.070795402</AMOUNT>
                 <USE>Boil</USE>
                 <TIME>10.00000000</TIME>
                 <NOTES>Medium with floral and citrus tones.</NOTES>
@@ -97,7 +97,7 @@
                 <NAME>Centennial</NAME>
                 <VERSION>1</VERSION>
                 <ALPHA>10.50000000</ALPHA>
-                <AMOUNT>0.370632511</AMOUNT>
+                <AMOUNT>0.340717252</AMOUNT>
                 <USE>Boil</USE>
                 <TIME>0.00000000</TIME>
                 <NOTES>Medium with floral and citrus tones.</NOTES>
@@ -116,7 +116,7 @@
                 <NAME>Chinook</NAME>
                 <VERSION>1</VERSION>
                 <ALPHA>13.00000000</ALPHA>
-                <AMOUNT>0.000580760</AMOUNT>
+                <AMOUNT>0.002810860</AMOUNT>
                 <USE>Boil</USE>
                 <TIME>60.00000000</TIME>
                 <NOTES>Medium strength, spicy, piney aroma. Used in IPAs, stouts, porters, pale ales, and lagers for bittering.</NOTES>
@@ -137,7 +137,7 @@
                 <NAME>Briess - 2 Row Brewers Malt</NAME>
                 <VERSION>1</VERSION>
                 <TYPE>Grain</TYPE>
-                <AMOUNT>3.252181136</AMOUNT>
+                <AMOUNT>2.885266238</AMOUNT>
                 <YIELD>80.50000000</YIELD>
                 <COLOR>2.00000000</COLOR>
                 <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
@@ -157,7 +157,7 @@
                 <NAME>Caramel/Crystal Malt - 40L</NAME>
                 <VERSION>1</VERSION>
                 <TYPE>Grain</TYPE>
-                <AMOUNT>2.312892488</AMOUNT>
+                <AMOUNT>1.056452113</AMOUNT>
                 <YIELD>74.00000000</YIELD>
                 <COLOR>40.00000000</COLOR>
                 <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
@@ -177,7 +177,7 @@
                 <NAME>Briess - Munich Malt 10L</NAME>
                 <VERSION>1</VERSION>
                 <TYPE>Grain</TYPE>
-                <AMOUNT>1.228996773</AMOUNT>
+                <AMOUNT>0.477376977</AMOUNT>
                 <YIELD>76.00000000</YIELD>
                 <COLOR>10.00000000</COLOR>
                 <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
@@ -214,7 +214,7 @@
                 <TIMES_CULTURED>0</TIMES_CULTURED>
                 <MAX_REUSE>10</MAX_REUSE>
                 <ADD_TO_SECONDARY>FALSE</ADD_TO_SECONDARY>
-                <YEAST>0.316458730</YEAST>
+                <YEAST>0.533913764</YEAST>
             </YEAST>
         </YEASTS>
         <WATERS />

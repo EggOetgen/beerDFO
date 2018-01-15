@@ -8,6 +8,8 @@
 #include "ofMain.h"
 #pragma once
 
+
+//all jsut for storing values from xml really
 class ingredients{
 
 
@@ -24,24 +26,16 @@ public:
     float alpha = 0;
     float beta;
     float time;
-    float HSI;
-    float hum;
-    float car;
-    float coh;
-    float myr;
-    
-    };
+       };
 
 class fermentables:public ingredients{
     
 public:
     float yield;
     float color;
-    float coarse_fine_dif;
-    float moisture;
+      float moisture;
     float di_pow;
-    float protein;
-    float most_in_batch;
+       float most_in_batch;
     float ibu_gal_per_lb;
     string type;
     string addAfterBoil;

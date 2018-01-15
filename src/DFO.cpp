@@ -6,22 +6,23 @@
 //
 //
 
+
+
+/*THIS CLASS IS BASED ON THE JAVASCRIPT DFO IMPLEMENTATION BY MOHAMMA MAJID AL-RIFAIE WITH ADDED FEATURES AND FITNESS FUNCTION*/
+
+
 #include "DFO.hpp"
 
 DFO::DFO(){
     
-    width = ofGetWidth();
-    height = ofGetHeight();
+    //size of visualisation
+    width = 200;
+    height = 500;
     
     scaleF = 5;
-    //    dimensions = dimensions_;
-    //    popSize = popSize_;
+    //disturbance threshold
     dt = 0.001;
     
-    
-    evalCount = 0;
-    FE_allowed = 30000;
-    offset = -0.0;
     
     
 }
@@ -29,13 +30,7 @@ DFO::DFO(){
 void DFO::setup(double dimensions_, int popSize_,double targetOG_, double targetFG_,double targetABV_, double targetIBU_, double targetCOl_, vector<hops*> hopVec_, vector<fermentables*> fermVec_, vector<yeast*> yeastVec_, float efficiency, float batchSize_){
     dimensions = dimensions_;
     popSize = popSize_;
-    
-//    targetOG = targetOG_;
-//    targetFG = targetFG_;
-//
-//    targetIBU = targetIBU_;
-//    targetCOL = targetCOl_;
-    
+ 
     target.push_back(targetOG_);
     target.push_back(targetFG_);
     target.push_back(targetABV_);
@@ -48,10 +43,11 @@ void DFO::setup(double dimensions_, int popSize_,double targetOG_, double target
     yeastVec = yeastVec_;
     
     batchSize = batchSize_;
-    //imgW = 100;
+  
     imgH =  dimensions;
     
     eff = efficiency;
+    //sets the macimum value for each or our elements
     ranges.clear();
     // ranges.resize(dimensions);
     
@@ -77,6 +73,7 @@ void DFO::setup(double dimensions_, int popSize_,double targetOG_, double target
 }
 
 
+//straight copy of mohammads
 void DFO::getRandF_or_RingT_Neighbours(int curr, Boolean topology) {
     
     if (topology) // RING
@@ -122,70 +119,26 @@ void DFO::findNeighbors(int curr){
         }
     }
     
-    // println( leftN + " :: " + rightN );
     
 }
 
-//double DFO::evaluate(vector<double> a, vector<hops*> hopVec, vector<fermentables*> fermVec, vector<yeast*> yeastVec, float batchSize) {
-//   // evalCount++;
-//   // return abs( Sphere(a) );
-//  //  double ibu = form.calcIBU(hopVec, fermVec, yeastVec);
-//   
-//    for (int i = 0; i < hopVec.size(); i ++ ){
-//    
-//        hopVec[i]->amount = a[i];
-//       // cout<<i<< " h"<<endl;
-//    }
-//    for (int i = hopVec.size(); i < fermVec.size()+hopVec.size(); i ++ ){
-//       // cout<<i<<" f"<<endl;
-//        fermVec[i-hopVec.size()]->amount = a[i];
-//    }
-//    for (int i = fermVec.size()+hopVec.size(); i < yeastVec.size()+hopVec.size()+fermVec.size(); i ++ ){
-//        
-//        yeastVec[i-(fermVec.size()+hopVec.size())]->amount = a[i];
-//       // cout<<i<<" y"<<endl;
-//    }
-//    form.calcOgFg(eff, yeastVec, fermVec, batchSize);
-//   
-//    double og = form.og;
-//    double fg = form.fg;
-//    double ibu = form.calcIBU(hopVec, fermVec, batchSize);
-//    double color = form.recalcColor_srm(fermVec, batchSize);
-//    
-//    double ogF   = abs(targetOG- og);
-//    //ibuF *= 0.0001;
-//    double fgF = abs(targetFG- fg);
-//    double ibuF   = abs(targetIBU- ibu);
-//    //ibuF *= 0.0001;
-//    double colorF = abs(targetCOL- color);
-//    
-//    //cout << ibuF << " " << colorF << endl;
-//
-//    return ogF + fgF + ibuF + colorF;
-//   // double abv = form.reca;
-//    // Sphere Schwefel12 Rosenbrock GSchwefel26
-//    // Rastrigin Ackley Griewank PenalizedP8 PenalizedP16
-//}
 
 
 double DFO::evaluate(vector<double> a) {
-    // evalCount++;
-    // return abs( Sphere(a) );
-    //  double ibu = form.calcIBU(hopVec, fermVec, yeastVec);
     
+    //set all our amoutns then find euclidean dist for fitness
     for (int i = 0; i < hopVec.size(); i ++ ){
         
         hopVec[i]->amount = a[i];
-        // cout<<i<< " h"<<endl;
+        
     }
     for (int i = hopVec.size(); i < fermVec.size()+hopVec.size(); i ++ ){
-        // cout<<i<<" f"<<endl;
-        fermVec[i-hopVec.size()]->amount = a[i];
+              fermVec[i-hopVec.size()]->amount = a[i];
     }
     for (int i = fermVec.size()+hopVec.size(); i < yeastVec.size()+hopVec.size()+fermVec.size(); i ++ ){
         
         yeastVec[i-(fermVec.size()+hopVec.size())]->amount = a[i];
-        // cout<<i<<" y"<<endl;
+       
     }
     form.calcOgFg(eff, yeastVec, fermVec, batchSize);
     vector<double> solution;
@@ -200,20 +153,12 @@ double DFO::evaluate(vector<double> a) {
      solution.push_back(abv);
      solution.push_back(ibu);
      solution.push_back(color);
-//    double ogF   = abs(targetOG- og);
-//    //ibuF *= 0.0001;
-//    double fgF = abs(targetFG- fg);
-//    double ibuF   = abs(targetIBU- ibu);
-//    //ibuF *= 0.0001;
-//    double colorF = abs(targetCOL- color);
     
     double fitness = euclid(target, solution);
-    //cout << ibuF << " " << colorF << endl;
+   
     
     return fitness;
-    // double abv = form.reca;
-    // Sphere Schwefel12 Rosenbrock GSchwefel26
-    // Rastrigin Ackley Griewank PenalizedP8 PenalizedP16
+   
 }
 
 void DFO::findBestFly() {
@@ -227,81 +172,10 @@ void DFO::findBestFly() {
     }
 }
 
-//void DFO::run(vector<hops*> hopVec, vector<fermentables*> fermVec, vector<yeast*> yeastVec, float batchSize){
-//    
-//    if (evalCount < FE_allowed) {
-//        // EVALUATION Phase
-//        for (int i = 0; i < popSize; i++)
-//        {
-//            flies[i]->setFitness(evaluate(flies[i]->returnFeatureVector(), hopVec, fermVec, yeastVec, batchSize));
-//        }
-//        
-//        findBestFly();
-//        
-//        // INTERACTION Phase
-//        for (int i = 0; i < popSize; i++) {
-//            if (i == bestFlyIndex)
-//                continue;
-//            
-//           // findNeighbors(i);
-//            // neighbours
-//            getRandF_or_RingT_Neighbours(i, true);
-//            double leftP, rightP;
-//            if (true) {
-//                leftP = flies[leftNeighbor]->getFitness();
-//                rightP = flies[rightNeighbor]->getFitness();
-//            }
-//            
-//            
-//            int chosen;
-//            if (leftP < rightP)
-//                chosen = leftNeighbor;
-//            else
-//                chosen = rightNeighbor;
-//            
-//            int dCounter = 0;
-//            // ================ Apply the update equation
-//            // =======================
-//            vector<double> temp;
-//            temp.resize(dimensions);
-//            
-//            for (int d = 0; d < dimensions; d++) {
-//                
-//                double range = flies[i]->ranges[d];
-//              //  cout<<range<<endl;
-//                temp[d] = flies[chosen]->getFeature(d) +
-//                ofRandom(1.0) * (flies[bestFlyIndex]->getFeature(d) - flies[i]->getFeature(d));// FINAL
-//                
-//                            // disturbance mechanism
-//             
-//                
-//                    if (ofRandom(1.0) < dt)
-//                    {
-//                        temp[d] =ofRandom(0, range);
-//                  //  temp[d] =ofRandom(-imgW,imgW);
-//                     //   dCounter++;
-//                    }
-//                //cout<<temp[d] <<" "<< "A"<<endl;
-//
-//              temp[d] =   wrapAround( range, temp[d]);
-//
-//              //   cout<<temp[d] <<" "<< "B"<<endl;
-//            }
-//            
-//            flies[i]->setFeatureVector(temp);
-//            
-//        }
-//        
-//    }
-//}
-//
-//
+//adapted from mohammads example,
 void DFO::run(){
     
-    
-    if (evalCount < FE_allowed) {
-        // EVALUATION Phase
-        for (int i = 0; i < popSize; i++)
+            for (int i = 0; i < popSize; i++)
         {
             flies[i]->setFitness(evaluate(flies[i]->returnFeatureVector()));
             
@@ -309,20 +183,16 @@ void DFO::run(){
         
         findBestFly();
         
-        // INTERACTION Phase
+    
         for (int i = 0; i < popSize; i++) {
             if (i == bestFlyIndex)
                         continue;
 
-            //  findNeighbors(i);
             getRandF_or_RingT_Neighbours(i, true);
             double leftP, rightP;
             
-            leftP = flies[leftNeighbor]->getFitness();// leftD *
-            // fly[leftN].getFitness();
-            rightP = flies[rightNeighbor]->getFitness();// rightD *
-            // fly[rightN].getFitness();
-            
+            leftP = flies[leftNeighbor]->getFitness();
+            rightP = flies[rightNeighbor]->getFitness();
             
             int chosen;
             if (leftP < rightP)
@@ -336,10 +206,6 @@ void DFO::run(){
             for (int d = 0; d < dimensions; d++) {
                 double range =ranges[d];
 
-             // temp[d] = flies[i]->getFeature(d) + ofRandom(1.0) *  (flies[chosen]->getFeature(d) - flies[i]->getFeature(d));// FINAL
-            //  temp[d] = flies[i]->getFeature(d) + ofRandom(1.0) *  (flies[chosen]->getFeature(d) - flies[i]->getFeature(d));// FINAL
-                
-
                temp[d] = flies[chosen]->getFeature(d) + (ofRandom(1.0) * (flies[bestFlyIndex]->getFeature(d) - flies[i]->getFeature(d)));
              
                 if (ofRandom(1.0) < dt)
@@ -347,12 +213,9 @@ void DFO::run(){
                                             temp[d] =ofRandom(0.0, range);
                                       
                                         }
-                                    //cout<<temp[d] <<" "<< "A"<<endl;
-                    
                                   temp[d] =   wrapAround( range, temp[d]);
                     
-                                  //   cout<<temp[d] <<" "<< "B"<<endl;
-                                }
+                                                                 }
                                 
                                 flies[i]->setFeatureVector(temp);
                                 
@@ -360,7 +223,7 @@ void DFO::run(){
             
         }
         
-    }
+    
 }
 double DFO::wrapAround(double range, double input) {
 
@@ -377,15 +240,8 @@ double DFO::wrapAround(double range, double input) {
     
 
 }
-double DFO::Sphere(vector<double> p) {
-    double a = 0;
-    for (int i = 0; i < dimensions; i++) {
-        a = a + pow(p[i] + offset, 2);
-    }
-    
-    return a;
-}
 
+//taken from mohammads example, adjusted so the flies always fill the lines
 void DFO::display(){
     
     // Draw the flies and update their positions
@@ -430,6 +286,7 @@ void DFO::display(){
     
 }
 
+//standard stuff
 double DFO::euclid(vector<double> a, vector<double> b){
 
     double runTot = 0;
@@ -443,22 +300,23 @@ double DFO::euclid(vector<double> a, vector<double> b){
 }
 
 
+
 void DFO::calcBestResults(){
     
     vector<double> a = flies[bestFlyIndex]->featVec;
+    
+    //not great but it works
     for (int i = 0; i < hopVec.size(); i ++ ){
         
         hopVec[i]->amount = a[i];
-        // cout<<i<< " h"<<endl;
-    }
+         }
     for (int i = hopVec.size(); i < fermVec.size()+hopVec.size(); i ++ ){
-        // cout<<i<<" f"<<endl;
-        fermVec[i-hopVec.size()]->amount = a[i];
+              fermVec[i-hopVec.size()]->amount = a[i];
     }
     for (int i = fermVec.size()+hopVec.size(); i < yeastVec.size()+hopVec.size()+fermVec.size(); i ++ ){
         
         yeastVec[i-(fermVec.size()+hopVec.size())]->amount = a[i];
-        // cout<<i<<" y"<<endl;
+     
     }
     form.calcOgFg(eff, yeastVec, fermVec, batchSize);
     

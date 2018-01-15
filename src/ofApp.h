@@ -30,15 +30,11 @@ class ofApp : public ofBaseApp{
     DFO dfo;
     ofxXmlSettings xml;
    
-    vector<ingredients*> ing;
-    vector<fermentables*> fermVec;
+    //where we save ingredients
+        vector<fermentables*> fermVec;
     vector<hops*> hopVec;
     vector<yeast*> yeastVec;
-       vector<fermentables*> fermVecBest;
-    vector<hops*> hopVecBest;
-    vector<yeast*> yeastVecBest;
-    
-    formulas forms;
+      formulas forms;
     int bestFly;
     float batchSize, efficiency;
     
@@ -46,15 +42,10 @@ class ofApp : public ofBaseApp{
     float desiredOG = 1.107;
     float desiredFG = 1.027;
     float desiredABV = 4.8;
-    float desiredIBU = 43.289;
-    float desiredCOL = 7.46393;
-    float ABVl, ABVh;
-    float IBUGUl = 0.f;
-    float IBUGUh = 1.f;
-    float COLORl = 2;
-    float COLORh = 50;
+    float desiredIBU = 41.;
+    float desiredCOL = 7.;
     
-    float eff;
+ 
     
     bool save;
     

@@ -6,12 +6,16 @@
 //
 //
 
+/* all of this based on code from brew target!!! brewtarget.org
+ 
+ only really changed to work with c++ and simplify
+ */
 #pragma once
 #include "ofMain.h"
 #include "ingredients.hpp"
 
 #define ROOT_PRECISION 0.000001
-
+//from brewtarget
 namespace PhysicalConstants{
     //! \brief Sucrose density in kg per L.
     const double sucroseDensity_kgL = 1.587;
@@ -27,6 +31,7 @@ namespace PhysicalConstants{
 }
 
 
+//from brewtarget
 class Polynomial
 {
 public:
@@ -94,13 +99,7 @@ public:
     
 
 
-/*!
- * \brief Root-finding by the secant method.
- *
- * \param x0 - one of two initial \b distinct guesses at the root
- * \param x1 - one of two initial \b distinct guesses at the root
- * \returns \c HUGE_VAL on failure, otherwise a root of the polynomial
- */
+//from brewtarget
 double rootFind( double x0, double x1 ) 
 {
     double guesses[] = { x0, x1 };
@@ -124,7 +123,7 @@ double rootFind( double x0, double x1 )
 private:
 std::vector<double> _coeffs;
 
-//! \brief returns base^pow
+///from brewtarget
 static double intPow( double base, unsigned int pow )
 {
     double ret = 1;
@@ -135,6 +134,7 @@ static double intPow( double base, unsigned int pow )
 }
 };
 
+//from brewtarget mainly recipe and algoritms class
 class formulas{
 
 public:

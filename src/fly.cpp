@@ -6,6 +6,10 @@
 //
 //
 
+/*THIS CLASS IS BASED ON THE JAVASCRIPT DFO IMPLEMENTATION BY MOHAMMA MAJID AL-RIFAIE WITH ADDED FEATURES AND FITNESS FUNCTION*/
+
+
+
 #include "fly.hpp"
 
 void fly::init(double dimensions, float w){

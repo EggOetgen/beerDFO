@@ -49,6 +49,6 @@ class ofApp : public ofBaseApp{
     
     bool save;
     
-     ofxImGui::Gui gui;
+   //  ofxImGui::Gui gui;
 		
 };

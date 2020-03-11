@@ -10,8 +10,8 @@ void ofApp::setup(){
     
     //full apa recipe and one with right ingredients but wrong amounts
     //xml.loadFile("apa.xml");
-      xml.loadFile("apaIng.xml");
-
+    //  xml.loadFile("apaIng.xml");
+   xml.loadFile("inCaveStock.xml");
     //load all our values from the xml
     xml.pushTag("RECIPES");
     xml.pushTag("RECIPE");
@@ -100,7 +100,7 @@ void ofApp::setup(){
     
  
      forms.calcOgFg(efficiency, yeastVec, fermVec, batchSize );
-      gui.setup();
+    //  gui.setup();
 }
 
 //--------------------------------------------------------------
@@ -168,21 +168,21 @@ void ofApp::update(){
 void ofApp::draw(){
     
     //gui gui gui
-    gui.begin();
-    
-    
-    {
-        ImGui::SliderFloat("ABV", &desiredABV, 1.0, 15.0);
-        ImGui::SliderFloat("Bitterness(ibu)", &desiredIBU, 0.5, 100.0);
-        ImGui::SliderFloat("Color", &desiredCOL, 2.0, 80.0);
-        ImGui::Text("The closer this value -> %.3f <- is to zero, the more confident I am you'll like my suggestion!", dfo.flies[dfo.bestFlyIndex]->fitness);
-        ImGui::Text("My current predictions for this recipe are:");
-        ImGui::Text("ABV             : %.3f ", dfo.returnBestABV());
-        ImGui::Text("Bitterness (IBU): %.3f ", dfo.returnBestIBU());
-        ImGui::Text("Colour          : %.3f ", dfo.returnBestCOL());
-        ImGui::Checkbox("Save this Recipe?", &save);
-    }
-    gui.end();
+//    gui.begin();
+//    
+//    
+//    {
+//        ImGui::SliderFloat("ABV", &desiredABV, 1.0, 15.0);
+//        ImGui::SliderFloat("Bitterness(ibu)", &desiredIBU, 0.5, 100.0);
+//        ImGui::SliderFloat("Color", &desiredCOL, 2.0, 80.0);
+//        ImGui::Text("The closer this value -> %.3f <- is to zero, the more confident I am you'll like my suggestion!", dfo.flies[dfo.bestFlyIndex]->fitness);
+//        ImGui::Text("My current predictions for this recipe are:");
+//        ImGui::Text("ABV             : %.3f ", dfo.returnBestABV());
+//        ImGui::Text("Bitterness (IBU): %.3f ", dfo.returnBestIBU());
+//        ImGui::Text("Colour          : %.3f ", dfo.returnBestCOL());
+//        ImGui::Checkbox("Save this Recipe?", &save);
+//    }
+//    gui.end();
     dfo.display();
 }
 
